@@ -2,6 +2,6 @@ defaults:
   -
     scope:
       path: "" # an empty string here means all files in the project
-         type: "pages" # Apply to pages (markdown files)
+      type: "pages" # Apply to pages (markdown files)
     values:
       layout: "default"
