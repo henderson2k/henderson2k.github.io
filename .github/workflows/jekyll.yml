@@ -1,2 +1,0 @@
-name: Build Jekyll site incrementally
-run: bundle exec jekyll build --incremental
