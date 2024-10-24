@@ -8,3 +8,8 @@ title: hello world
 
 
 
+<div id="myDiv">This content will be changed by JavaScript.</div>
+
+<script>
+  document.getElementById("myDiv").innerText = "Hello from JavaScript!";
+</script>
