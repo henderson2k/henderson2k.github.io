@@ -19,7 +19,13 @@
     </section>
     <footer>
     </footer>
-
+    <script>
+      async function copyWithClipboard(text) {
+          const clipboardText = await navigator.clipboard.readText();
+          await navigator.clipboard.writeText(`${text} ${clipboardText}`);
+          alert(`Copied: ${text} ${clipboardText}`);
+      }
+  </script>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
           // Your JavaScript code
