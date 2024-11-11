@@ -14,5 +14,4 @@ title: hello world
 <https://app.sketchup.com/app?hl=en>
 
 <br>
-<p onclick="copyWithClipboard(this.innerText)">Click this text to copy it along with clipboard content.</p>
- 
+ <p onclick="copyWithClipboard('Here is your clipboard content: {CLIPBOARD}')">Click to copy text with clipboard content.</p>
