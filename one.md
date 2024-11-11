@@ -14,4 +14,4 @@ title: hello world
 <https://app.sketchup.com/app?hl=en>
 
 <br>
-  <p onclick="copyWithClipboard(this.innerText)">The Asset Number is: {CLIPBOARD}< cool/p>
+  <p onclick="copyWithClipboard(this.innerText)">The Asset Number is: {CLIPBOARD}< cool</p>
