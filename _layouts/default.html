@@ -21,11 +21,14 @@
     </footer>
    
     <script>
-      async function copyWithClipboard(text) {
+      async function copyWithClipboard(element) {
+          const text = element.innerText;
           const clipboardText = await navigator.clipboard.readText();
-          const resultText = text.replace("#ASSET#", clipboardText); // Replace custom placeholder with clipboard content
+          const resultText = text.replace("#ASSET#", clipboardText);
           await navigator.clipboard.writeText(resultText);
-          alert(`Copied: ${resultText}`);
+          
+          // Change text color to green
+          element.classList.add("copied");
       }
   </script>
    
