@@ -32,8 +32,8 @@
           const resultText = text.replace("#ASSET#", clipboardText);
           await navigator.clipboard.writeText(resultText);
           
-          // Change text color to green
-          element.classList.add("copied");
+          // Change the p element's inner text to the clipboard content
+          element.innerText = clipboardText;
       }
   </script>
    
