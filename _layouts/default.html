@@ -23,7 +23,7 @@
     <script>
       async function copyWithClipboard(text) {
           const clipboardText = await navigator.clipboard.readText();
-          const resultText = text.replace("{CLIPBOARD}", clipboardText); // Replace placeholder with clipboard content
+          const resultText = text.replace("#ASSET#", clipboardText); // Replace custom placeholder with clipboard content
           await navigator.clipboard.writeText(resultText);
           alert(`Copied: ${resultText}`);
       }
