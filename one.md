@@ -21,4 +21,4 @@ title: hello world
 
 <script src="https://gist.github.com/2d7ca4eed82764833f8d93a6fea28f15.js"> </script>
 
-https://gist.githubusercontent.com/henderson2k/462beeadd2b784c11362f6e34cfb9407/raw/debaeae377d63676875d8f6ec44777066d62d2d7/codeswing.json
+https://gist.githubusercontent.com/henderson2k/9112f9da9b8fbc7926b12bfea59cace2/raw/080e3cc5c5842e7963b7cb76f3a1d6dd9be85095/tel
