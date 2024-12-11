@@ -19,5 +19,5 @@ title: hello world
    <br><br>
 
 
-<script src="https://gist.githubusercontent.com/henderson2k/9112f9da9b8fbc7926b12bfea59cace2/raw/080e3cc5c5842e7963b7cb76f3a1d6dd9be85095/tel> </script>
+<script src="https://gist.githubusercontent.com/henderson2k/9112f9da9b8fbc7926b12bfea59cace2/raw/080e3cc5c5842e7963b7cb76f3a1d6dd9be85095/tel"> </script>
 
