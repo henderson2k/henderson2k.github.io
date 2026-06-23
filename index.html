@@ -5,53 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ping Tool</title>
     <style>
-        /* Minimal plain-text styling */
-        .clickable-command {
+        /* Styling the input to look like plain text */
+        .ping-input {
             font-family: monospace;
             font-size: 18px;
-            cursor: pointer;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            width: 250px;
+            outline: none;
             color: #0000ee;
-            text-decoration: underline;
-            user-select: none;
+        }
+        .ping-input:focus {
+            border-bottom: 2px solid #0000ee;
         }
     </style>
 </head>
 <body>
 
-    <span id="cmd-text" class="clickable-command" onclick="copyCommand()">ping</span>
+    <input type="text" id="ping-input" class="ping-input" value="ping ">
+
+    <button onclick="copyCommand()">Copy Command</button>
 
     <script>
-        const baseCommand = "ping ";
-
         async function copyCommand() {
-            const textElement = document.getElementById('cmd-text');
+            const inputField = document.getElementById('ping-input');
+            const fullCommand = inputField.value;
 
             try {
-                // Read actual contents of the user's clipboard
-                const currentClipboard = await navigator.clipboard.readText();
-                const cleanedInput = currentClipboard.trim();
+                // Write the current value of the input box to the clipboard
+                await navigator.clipboard.writeText(fullCommand);
 
-                if (cleanedInput) {
-                    // Create the full command and push it back to the clipboard
-                    const fullCommand = baseCommand + cleanedInput;
-                    await navigator.clipboard.writeText(fullCommand);
-
-                    // Show the full generated command as visual feedback
-                    textElement.textContent = fullCommand;
-                    textElement.style.color = "green";
-                    
-                    // Reset back to just "ping" after 1.5 seconds
-                    setTimeout(() => {
-                        textElement.textContent = "ping";
-                        textElement.style.color = "#0000ee";
-                    }, 1500);
-                } else {
-                    alert("Your clipboard is empty! Copy something first.");
-                }
+                // Visual feedback
+                const originalColor = inputField.style.color;
+                inputField.style.color = "green";
+                inputField.value = "Copied!";
+                
+                setTimeout(() => {
+                    inputField.value = fullCommand;
+                    inputField.style.color = originalColor;
+                }, 1500);
 
             } catch (err) {
-                console.error("Failed to read/write clipboard: ", err);
-                alert("Clipboard access denied. Please allow clipboard permissions.");
+                console.error("Failed to write to clipboard: ", err);
+                alert("Clipboard access denied.");
             }
         }
     </script>
