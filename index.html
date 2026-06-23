@@ -61,7 +61,7 @@
 <body>
 
     <div class="container">
-        <div class="command-box">ping <span id="clip-text">m17884</span></div>
+        <div class="command-box">ping <span id="clip-text">clipboard</span></div>
         <button class="copy-btn" id="copy-btn" onclick="copyCommand()">Copy</button>
     </div>
 
@@ -73,39 +73,37 @@
             const clipSpan = document.getElementById('clip-text');
 
             try {
+                // Read actual contents of the user's clipboard
                 const currentClipboard = await navigator.clipboard.readText();
                 const cleanedInput = currentClipboard.trim();
 
                 if (cleanedInput) {
+                    // Temporarily update the text on screen to show what you copied
                     clipSpan.textContent = cleanedInput;
+                    
+                    // Create the full command and push it to clipboard
                     const fullCommand = baseCommand + cleanedInput;
                     await navigator.clipboard.writeText(fullCommand);
 
+                    // Success animation
                     btn.textContent = "Copied!";
                     btn.classList.add('success');
                     
+                    // Reset back to "ping clipboard" after 1.5 seconds
                     setTimeout(() => {
                         btn.textContent = "Copy";
                         btn.classList.remove('success');
+                        clipSpan.textContent = "clipboard";
                     }, 1500);
                 } else {
-                    alert("Your clipboard is empty! Paste or copy something first.");
+                    alert("Your clipboard is empty! Copy something first.");
                 }
 
             } catch (err) {
                 console.error("Failed to read/write clipboard: ", err);
-                alert("Clipboard access denied.");
+                alert("Clipboard access denied. Please click 'Allow' if prompted.");
             }
         }
-
-        window.addEventListener('focus', async () => {
-            try {
-                const currentClipboard = await navigator.clipboard.readText();
-                if (currentClipboard.trim()) {
-                    document.getElementById('clip-text').textContent = currentClipboard.trim();
-                }
-            } catch (e) {}
-        });
     </script>
 
 </body>
