@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ping Clipboard Tool</title>
+    <title>Ping Tool</title>
     <style>
-        /* Just basic text styling, making the command look clickable */
+        /* Minimal plain-text styling */
         .clickable-command {
             font-family: monospace;
             font-size: 18px;
@@ -16,7 +17,8 @@
     </style>
 </head>
 <body>
-    <span id="cmd-text" class="clickable-command" onclick="copyCommand()">ping clipboard</span>
+
+    <span id="cmd-text" class="clickable-command" onclick="copyCommand()">ping</span>
 
     <script>
         const baseCommand = "ping ";
@@ -30,19 +32,19 @@
                 const cleanedInput = currentClipboard.trim();
 
                 if (cleanedInput) {
-                    // Create the full command and push it to clipboard
+                    // Create the full command and push it back to the clipboard
                     const fullCommand = baseCommand + cleanedInput;
                     await navigator.clipboard.writeText(fullCommand);
 
-                    // Brief text update for feedback
-                    textElement.textContent = "Copied!";
+                    // Show the full generated command as visual feedback
+                    textElement.textContent = fullCommand;
                     textElement.style.color = "green";
                     
-                    // Reset back to "ping clipboard" after 1.2 seconds
+                    // Reset back to just "ping" after 1.5 seconds
                     setTimeout(() => {
-                        textElement.textContent = "ping clipboard";
+                        textElement.textContent = "ping";
                         textElement.style.color = "#0000ee";
-                    }, 1200);
+                    }, 1500);
                 } else {
                     alert("Your clipboard is empty! Copy something first.");
                 }
