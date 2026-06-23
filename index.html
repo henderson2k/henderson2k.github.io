@@ -5,72 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ping Clipboard Tool</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f6f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background: #ffffff;
-            padding: 24px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .command-box {
-            background-color: #1e1e1e;
-            color: #9cdcfe;
-            font-family: "Courier New", Courier, monospace;
-            font-size: 16px;
-            padding: 12px 18px;
-            border-radius: 6px;
-            min-width: 200px;
-            box-sizing: border-box;
-        }
-        .command-box span {
-            color: #ce9178; 
-        }
-        .copy-btn {
-            background-color: #007acc;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 15px;
-            font-weight: 600;
-            border-radius: 6px;
+        /* Just basic text styling, making the command look clickable */
+        .clickable-command {
+            font-family: monospace;
+            font-size: 18px;
             cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-        }
-        .copy-btn:hover {
-            background-color: #0062a3;
-        }
-        .copy-btn:active {
-            transform: scale(0.98);
-        }
-        .copy-btn.success {
-            background-color: #28a745;
+            color: #0000ee;
+            text-decoration: underline;
+            user-select: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="command-box">ping <span id="clip-text">clipboard</span></div>
-        <button class="copy-btn" id="copy-btn" onclick="copyCommand()">Copy</button>
-    </div>
+    <span id="cmd-text" class="clickable-command" onclick="copyCommand()">ping clipboard</span>
 
     <script>
         const baseCommand = "ping ";
 
         async function copyCommand() {
-            const btn = document.getElementById('copy-btn');
-            const clipSpan = document.getElementById('clip-text');
+            const textElement = document.getElementById('cmd-text');
 
             try {
                 // Read actual contents of the user's clipboard
@@ -78,30 +32,26 @@
                 const cleanedInput = currentClipboard.trim();
 
                 if (cleanedInput) {
-                    // Temporarily update the text on screen to show what you copied
-                    clipSpan.textContent = cleanedInput;
-                    
                     // Create the full command and push it to clipboard
                     const fullCommand = baseCommand + cleanedInput;
                     await navigator.clipboard.writeText(fullCommand);
 
-                    // Success animation
-                    btn.textContent = "Copied!";
-                    btn.classList.add('success');
+                    // Brief text update for feedback
+                    textElement.textContent = "Copied!";
+                    textElement.style.color = "green";
                     
-                    // Reset back to "ping clipboard" after 1.5 seconds
+                    // Reset back to "ping clipboard" after 1.2 seconds
                     setTimeout(() => {
-                        btn.textContent = "Copy";
-                        btn.classList.remove('success');
-                        clipSpan.textContent = "clipboard";
-                    }, 1500);
+                        textElement.textContent = "ping clipboard";
+                        textElement.style.color = "#0000ee";
+                    }, 1200);
                 } else {
                     alert("Your clipboard is empty! Copy something first.");
                 }
 
             } catch (err) {
                 console.error("Failed to read/write clipboard: ", err);
-                alert("Clipboard access denied. Please click 'Allow' if prompted.");
+                alert("Clipboard access denied. Please allow clipboard permissions.");
             }
         }
     </script>
