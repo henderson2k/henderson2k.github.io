@@ -1,0 +1,29 @@
+Log into server
+Enter-PSSession datasan-fs
+
+
+List Quota Templates on Server
+Get-FsrmQuotaTemplate | Select-Object -ExpandProperty Name
+Get-FsrmQuotaTemplate | Select-Object Name, Size
+
+List folder like 
+dir -Filter hendersonand* -Directory
+
+Show quota for folder
+Get-FsrmQuota -Path $PWD | Format-List
+
+Chage quota for current folder 
+Remove-FsrmQuota -Path $PWD -Confirm:$false
+New-FsrmQuota -Path $PWD -Template "NameOfYourTemplate"
+
+Access rights inc. inheritance on current folder
+(Get-Acl -Path $PWD).Access | Select-Object IdentityReference, FileSystemRights, AccessControlType, IsInherited
+
+Directory list (newest items first)
+Get-ChildItem | Sort-Object LastWriteTime -Descending
+
+query pc for logged in user
+quser /server:Asset
+
+List users group membership
+net user USERNAME /domain
