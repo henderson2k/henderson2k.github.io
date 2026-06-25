@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ping Clipboard Tool</title>
     <style>
-        /* Just basic text styling, making the command look clickable */
         .clickable-command {
             font-family: monospace;
             font-size: 18px;
@@ -16,32 +15,31 @@
     </style>
 </head>
 <body>
-    <span id="cmd-text" class="clickable-command" onclick="copyCommand()">ping clipboard</span>
 
+    <span id="cmd-text" class="clickable-command" onclick="copyCommand()">ping CB -t</span>
 
     <script>
-        const baseCommand = "ping ";
+        // The pattern to look for and replace
+        const placeholder = "CB";
 
         async function copyCommand() {
             const textElement = document.getElementById('cmd-text');
+            const template = "ping CB -t";
 
             try {
-                // Read actual contents of the user's clipboard
                 const currentClipboard = await navigator.clipboard.readText();
                 const cleanedInput = currentClipboard.trim();
 
                 if (cleanedInput) {
-                    // Create the full command and push it to clipboard
-                    const fullCommand = baseCommand + cleanedInput;
+                    // Substitute 'CB' with the clipboard content
+                    const fullCommand = template.replace(placeholder, cleanedInput);
                     await navigator.clipboard.writeText(fullCommand);
 
-                    // Brief text update for feedback
                     textElement.textContent = "Copied!";
                     textElement.style.color = "green";
 
-                    // Reset back to "ping clipboard" after 1.2 seconds
                     setTimeout(() => {
-                        textElement.textContent = "ping clipboard";
+                        textElement.textContent = template;
                         textElement.style.color = "#0000ee";
                     }, 1200);
                 } else {
@@ -54,5 +52,5 @@
             }
         }
     </script>
-
 </body>
+</html>
