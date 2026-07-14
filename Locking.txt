@@ -25,5 +25,5 @@ Check  with the auditpol  to make sure change took effect
 
 
 
-Force gp update on remote PC
+Force gpupdate on remote PC
 Invoke-Command -ComputerName "d12069" -ScriptBlock { gpupdate /force }
