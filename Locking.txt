@@ -1,0 +1,23 @@
+Locking
+
+PS command to show the InactivityTimeoutSecs
+
+Invoke-Command -ComputerName "d12069" -ScriptBlock { Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "InactivityTimeoutSecs" | Select-Object InactivityTimeoutSecs }
+
+This command sets it to zore (disable)
+
+Invoke-Command -ComputerName "d12069" -ScriptBlock {Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "InactivityTimeoutSecs" -Value 0}
+
+
+
+In a Enter-PSSession of remote PC
+
+This command shows if auditing other Logon/Logoff events (like locking)
+
+auditpol /get /subcategory:"Other Logon/Logoff Events"
+
+This command enables the logging of other log on/off events
+
+auditpol /set /subcategory:"Other Logon/Logoff Events" /success:enable /failure:enable
+
+Check  with the auditpol  to make sure change took effect
